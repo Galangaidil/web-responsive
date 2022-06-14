@@ -26,7 +26,7 @@ Tugas M3 dan M4
 
 ### Route
 
-```injectablephp
+```php
 Route::middleware('guest')->group(function (){
     Route::get('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
 
@@ -56,7 +56,7 @@ Route::middleware('auth')->group( function (){
 
 Login, verification, dan logout diatur oleh Controller `AuthController`.
 
-```injectablephp
+```php
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -115,7 +115,7 @@ Sedangkan komponen yang bisa di _inject_ yaitu:
 - Title
 - Content
 
-```html
+```blade
 <!doctype html>
 <html lang="en">
 <head>
@@ -207,7 +207,7 @@ Sedangkan komponen yang bisa di _inject_ yaitu:
 
 Penggunaan _master layout_ pada halaman home:
 
-```html
+```blade
 @extends('layouts.app')
 
 @section('title', 'Home')
@@ -236,7 +236,7 @@ Penggunaan _master layout_ pada halaman home:
 
 Penggunaan _master layout_ pada halaman mahasiswa:
 
-```html
+```blade
 @extends('layouts.app')
 
 @section('title', 'Mahasiswa')
@@ -267,13 +267,13 @@ Penggunaan _master layout_ pada halaman mahasiswa:
 
 Membuat Model Dosen beserta dengan Controller, Migration, dan Factory.
 
-```shell
+```sh
 php artisan make:model Dosen -mcf
 ```
 
 Migration pada model Dosen. Menentukan _schema database_ termasuk nama kolom dan tipe data.
 
-```injectablephp
+```php
 public function up()
     {
         Schema::create('dosens', function (Blueprint $table) {
@@ -289,7 +289,7 @@ public function up()
 
 Model Dosen. Menentukan _field_ yang boleh di isi.
 
-```injectablephp
+```php
 class Dosen extends Model
 {
     use HasFactory;
@@ -306,7 +306,7 @@ DosenFactory. Mendefinisikan nilai-nilai yang harus diterapkan pada saat memasuk
 - Dan Jabatan Strukturan
 
 
-```injectablephp
+```php
 public function definition()
     {
         $JabatanStruktural = ['Rektor', 'Wakil Rektor', 'Dekan', 'Wakil Dekan', 'Kaprodi', 'Kepala Perpustakaan', 'Kepala Laboratorium', 'Kepala Lembaga Penelitian', 'Humas'];
@@ -322,7 +322,7 @@ public function definition()
 
 Seeding Dosen. Mengisikan 100 data Dosen ke dalam database.
 
-```injectablephp
+```php
 public function run()
     {
         \App\Models\Dosen::factory(100)->create();
@@ -331,7 +331,7 @@ public function run()
 
 DosenController. mengembalikan view beserta data dosen yang telah di Paginate sebanyak 10.
 
-```injectablephp
+```php
 class DosenController extends Controller
 {
     public function index()
@@ -343,7 +343,7 @@ class DosenController extends Controller
 
 View Dosen:
 
-```html
+```blade
 @extends('layouts.app')
 
 @section('title', 'Dosen')
@@ -387,7 +387,7 @@ View Dosen:
 
 ### Uji Authentication
 
-```injectablephp
+```php
 class AuthenticationTest extends TestCase
 {
     use RefreshDatabase;
@@ -438,7 +438,7 @@ class AuthenticationTest extends TestCase
 
 ### Uji Halaman
 
-```injectablephp
+```php
 class PageTest extends TestCase
 {
     use RefreshDatabase;
